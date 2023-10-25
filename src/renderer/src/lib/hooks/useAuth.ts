@@ -6,17 +6,21 @@ import supabase from '../supabase'
 function useAuth(): {
   session: Session | null
   user: UserProfile | null
-  error: PostgrestError | null | AuthError
+  error: PostgrestError | null | AuthError | string
+  isLoading: boolean
 } {
   const [session, setSession] = useState<Session | null>(null)
   const [user, setUser] = useState<UserProfile | null>(null)
-  const [error, setError] = useState<PostgrestError | null | AuthError>(null)
+  const [error, setError] = useState<PostgrestError | null | string | AuthError>(null)
+  const [isLoading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
+    setLoading(true)
     const getSession = async (): Promise<void> => {
       const { data, error } = await supabase.auth.getSession()
       if (error || !data.session) {
-        setError(error)
+        setError(error || 'There was an error fetching your session')
+        setLoading(false)
         return
       }
 
@@ -37,6 +41,7 @@ function useAuth(): {
         .single()
       if (error || !data) {
         setError(error)
+        setLoading(false)
         return
       }
 
@@ -47,7 +52,7 @@ function useAuth(): {
     }
   }, [session])
 
-  return { session, user, error }
+  return { session, user, error, isLoading }
 }
 
 export default useAuth

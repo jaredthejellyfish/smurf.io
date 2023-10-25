@@ -10,30 +10,36 @@ import useAuth from './lib/hooks/useAuth'
 import UserProvider from './components/user-provider'
 
 function App(): JSX.Element {
-  const { user } = useAuth()
+  const { user, isLoading, error } = useAuth()
 
-  if (!user) {
+  if (user) {
+    return (
+      <UserProvider user={user}>
+        <ThemeProvider>
+          <RouterProvider>
+            <Navigation />
+            <main className="px-3">
+              <Route path="/" component={<HomePage />} />
+              <Route path="/settings" component={<SettingsPage />} />
+              <Route path="/debug" component={<DebugPage />} />
+            </main>
+          </RouterProvider>
+        </ThemeProvider>
+      </UserProvider>
+    )
+  } else if (isLoading && !error) {
+    return (
+      <ThemeProvider>
+        <p>Loading</p>
+      </ThemeProvider>
+    )
+  } else {
     return (
       <ThemeProvider>
         <AuthPage client={supabase} />
       </ThemeProvider>
     )
   }
-
-  return (
-    <UserProvider user={user}>
-      <ThemeProvider>
-        <RouterProvider>
-          <Navigation />
-          <main className="px-3">
-            <Route path="/" component={<HomePage />} />
-            <Route path="/settings" component={<SettingsPage />} />
-            <Route path="/debug" component={<DebugPage />} />
-          </main>
-        </RouterProvider>
-      </ThemeProvider>
-    </UserProvider>
-  )
 }
 
 export default App

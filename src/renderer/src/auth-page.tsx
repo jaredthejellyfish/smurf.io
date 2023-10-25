@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { SupabaseClient } from '@supabase/supabase-js'
+import { Input } from './components/ui/input'
 
 export default function AuthPage({ client }: { client: SupabaseClient }): JSX.Element {
   const [username, setUsername] = useState('')
@@ -24,9 +25,9 @@ export default function AuthPage({ client }: { client: SupabaseClient }): JSX.El
       onSubmit={(e): Promise<void> => signIn(e)}
     >
       <label>Username</label>
-      <input type="text" value={username} onChange={(e): void => setUsername(e.target.value)} />
+      <Input type="text" value={username} onChange={(e): void => setUsername(e.target.value)} />
       <label>Password</label>
-      <input type="password" value={password} onChange={(e): void => setPassword(e.target.value)} />
+      <Input type="password" value={password} onChange={(e): void => setPassword(e.target.value)} />
       <button type="submit">Log in</button>
     </form>
   )
