@@ -27,6 +27,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@supabase/supabase-js": "^2.38.2",
     "@supabase/ui": "^0.36.5",
+    "@tanstack/react-table": "^8.10.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "electron-updater": "^6.1.4",

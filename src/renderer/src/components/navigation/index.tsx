@@ -21,8 +21,8 @@ const Navigation = (): JSX.Element => {
     <nav className="h-14 dark:bg-neutral-950 flex flex-row items-center px-3 justify-between shadow border dark:border-b-neutral-800 mb-2 border-transparent">
       <div className="flex flex-row items-center gap-3">
         <Avatar>
-          <AvatarImage src={'https://github.com/shadcn.png'} />
-          <AvatarFallback>AJ</AvatarFallback>
+          <AvatarImage src={user.avatar_url || 'https://github.com/shadcn.png'} />
+          <AvatarFallback>?</AvatarFallback>
         </Avatar>
         <span className="font-semibold">{user.username}</span>
       </div>

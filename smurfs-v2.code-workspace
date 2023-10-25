@@ -1,17 +1,39 @@
 {
   "folders": [
     {
-      "name": "project-root",
+      "name": "renderer",
+      "path": "src/renderer"
+    },
+    {
+      "name": "main",
+      "path": "src/main"
+    },
+    {
+      "name": "preload",
+      "path": "src/preload"
+    },
+    {
+      "name": "root",
       "path": "./"
     },
     {
       "name": "supabase-functions",
       "path": "supabase/functions"
+    },
+        {
+      "name": "dist",
+      "path": "dist/"
     }
   ],
   "settings": {
     "files.exclude": {
-      "supabase/functions/": true
+      "supabase/functions/": true,
+      ".*": true,
+      "out/": true,
+      "dist/": true,
+      "node_modules/": true,
+      "pnpm-lock.yaml": true,
+      "components.json": true
     },
     "git-blame.gitWebUrl": ""
   }
